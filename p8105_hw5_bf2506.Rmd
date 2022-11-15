@@ -34,6 +34,6 @@ Then, create a city_state variable (e.g. “Baltimore, MD”) and then summarize
 ```{r}
 homi_data = 
   homi_data %>% 
-  mutate(city_state = paste(city, state, sep = ",", collapse = NULL))
+  mutate(city_state = paste(city, state, sep = ", ", collapse = NULL))
 ```
 
