@@ -7,3 +7,13 @@ output: github_document
 ```{r load package, message=FALSE, warning=FALSE}
 library(tidyverse)
 ```
+
+### Problem 2
+
+```{r read homi_data}
+homi_data = 
+  read.csv("./data/homicide-data.csv") %>%
+  janitor::clean_names()
+  
+```
+
