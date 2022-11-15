@@ -31,9 +31,22 @@ homi_data =
     * Open/No arrest: *All other cases* were classified as having no arrest.
 
 Then, create a city_state variable (e.g. “Baltimore, MD”) and then summarize within cities to obtain the total number of homicides and the number of unsolved homicides (those for which the disposition is “Closed without arrest” or “Open/No arrest”).
-```{r}
+```{r message=FALSE, warning=FALSE}
 homi_data = 
   homi_data %>% 
-  mutate(city_state = paste(city, state, sep = ", ", collapse = NULL))
+  mutate(city_state = paste(city, state, sep = ", ", collapse = NULL)) 
+
+total_df = 
+  homi_data %>% 
+  group_by(city) %>% 
+  summarize(total_number_homicide = n())
+total_df
+
+unsolved_df = 
+  homi_data %>% 
+  filter(disposition != "Closed by arrest") %>% 
+  group_by(city) %>% 
+  summarize(number_unsolved_homicide = n())
+unsolved_df  
 ```
 
