@@ -174,4 +174,5 @@ Power_Truemu_Plot =
 
 Power_Truemu_Plot
 ```
-
+* Describe the association between effect size and power.
+The effect size is the difference between the true mu and the mu we assumed (mu = 0 in this situation), so when the true mu goes from 0 to 6, the effect size increases, then we found the power of the test also increases. We can conclude that when everything else doesn't change, the power of test will increase if the effect size increases.
