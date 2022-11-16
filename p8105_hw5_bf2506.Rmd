@@ -110,3 +110,24 @@ Since I discussed aboved, the  total number of homicides and the number of unsol
 
 ### Problem 3
 
+```{r}
+set.seed(1)
+```
+
+##### Part A 
+
+Generate 5000 datasets from the model(x ~ normal(mu, sigma)). For each dataset, save μ_cap and the p-value arising from t.test(significance level = 0,05)
+```{r}
+output = vector("list", 5000)
+
+for (i in 1:5000) {
+  output[[i]] = 
+    broom::tidy(t.test( x = rnorm(n = 30, mean = mu, sd = sigma), alternative = "two.sided", mu = 0, paired = FALSE, conf.level = 0.95)) %>% 
+    select(estimate, p.value) %>% 
+    rename(mu_cap = estimate)
+}
+
+sim_results = bind_rows(output)
+sim_results
+```
+
