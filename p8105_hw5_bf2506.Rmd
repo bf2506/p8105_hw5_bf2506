@@ -118,9 +118,9 @@ set.seed(1)
 
 Generate 5000 datasets from the model(x ~ normal(mu, sigma)). For each dataset, save μ_cap and the p-value arising from t.test(significance level = 0,05)
 ```{r}
-output = vector("list", 5)
+output = vector("list", 5000)
 
-for (i in 1:5) {
+for (i in 1:5000) {
   output[[i]] = 
     broom::tidy(t.test( x = rnorm(n = 30, mean = 0, sd = 5), alternative = "two.sided", mu = 0, paired = FALSE, conf.level = 0.95)) %>% 
     select(estimate, p.value) %>% 
@@ -135,9 +135,9 @@ sim_results_0
 
 ```{r}
 sim_mu = function(mu) {
-  output = vector("list", 5)
+  output = vector("list", 5000)
   
-  for (i in 1:5) {
+  for (i in 1:5000) {
   output[[i]] = 
     broom::tidy(t.test( x = rnorm(n = 30, mean = mu, sd = 5), alternative = "two.sided", mu = 0, paired = FALSE, conf.level = 0.95)) %>% 
     select(estimate, p.value) %>% 
@@ -158,5 +158,20 @@ sim_df =
     estimate_df = map(mu, sim_mu)
   ) %>% 
   unnest(estimate_df)
-
 ```
+
+##### Part C
+Make a plot showing the proportion of times the null was rejected (the power of the test) on the y axis and the true value of μ on the x axis. Describe the association between effect size and power.
+```{r message=FALSE, warning=FALSE}
+Power_Truemu_Plot = 
+  sim_df %>% 
+  filter(p.value <= 0.05) %>% 
+  group_by(mu) %>% 
+  summarize(times = n()) %>% 
+  ggplot(aes(x = as.factor(mu), y = times/5000)) + 
+  geom_point(alpha = .6) +
+  labs(title = "The Power Of The Test Of Every True MU", x = "True Value Of Mu", y = "Proportion Of Times Null Was Rejected ")
+
+Power_Truemu_Plot
+```
+
