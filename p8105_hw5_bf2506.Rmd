@@ -176,3 +176,25 @@ Power_Truemu_Plot
 ```
 * Describe the association between effect size and power.
 The effect size is the difference between the true mu and the mu we assumed (mu = 0 in this situation), so when the true mu goes from 0 to 6, the effect size increases, then we found the power of the test also increases. We can conclude that when everything else doesn't change, the power of test will increase if the effect size increases.
+
+##### Part D
+
+Make a plot showing the average estimate of μ_cap on the y axis and the true value of μ on the x axis. 
+```{r}
+Ave_True_plot = 
+  sim_df %>% 
+  group_by(mu) %>% 
+  summarize(ave_mu_cap = mean(mu_cap)) %>% 
+  ggplot(aes(x = as.factor(mu), y = ave_mu_cap)) + 
+  geom_point(alpha = .6) +
+  labs(title = "Average Estimate Of Mu_cap Of Every True Mu", x = "True Value Of Mu", y = "Average Estimate Of Mu_cap")
+
+Ave_True_plot
+```
+
+Make a second plot the average estimate of μ_cap only in samples for which the null was rejected on the y axis and the true value of μ on the x axis. 
+```{r}
+
+```
+
+Is the sample average of μ^ across tests for which the null is rejected approximately equal to the true value of μ? Why or why not?
