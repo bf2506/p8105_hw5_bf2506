@@ -103,6 +103,7 @@ Estimates_CIs_Plot =
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Estimate And CI Of Proportion Of Unsolved Homicides For Each City", x = "City, State", y = "Estimate / CI")
+
 Estimates_CIs_Plot
 ```
 Since I discussed aboved, the  total number of homicides and the number of unsolved homicides in Tulsa, AL are not sufficient and enough to analyze and run a prop.test, I drop this data when making the "Estimate And CI Of Proportion Of Unsolved Homicides For Each City" plot.
