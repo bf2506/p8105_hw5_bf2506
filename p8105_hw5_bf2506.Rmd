@@ -116,7 +116,7 @@ set.seed(1)
 
 ##### Part A 
 
-Generate 5000 datasets from the model(x ~ normal(mu, sigma)). For each dataset, save μ_cap and the p-value arising from t.test(significance level = 0,05)
+Generate 5000 datasets from the model(x ~ normal(mu, sigma)). For each dataset, save mu_cap and the p-value arising from t.test(significance level = 0,05)
 ```{r}
 output = vector("list", 5000)
 
@@ -151,7 +151,7 @@ Repeat for mu=1,2,3,4,5,6
 ```{r}
 sim_df = 
   expand_grid(
-    mu = 0:6,
+    mu = 1:6,
     iter = 1
   ) %>% 
   mutate(
@@ -161,7 +161,7 @@ sim_df =
 ```
 
 ##### Part C
-Make a plot showing the proportion of times the null was rejected (the power of the test) on the y axis and the true value of μ on the x axis. Describe the association between effect size and power.
+Make a plot showing the proportion of times the null was rejected (the power of the test) on the y axis and the true value of mu on the x axis. Describe the association between effect size and power.
 ```{r message=FALSE, warning=FALSE}
 Power_Truemu_Plot = 
   sim_df %>% 
@@ -175,11 +175,11 @@ Power_Truemu_Plot =
 Power_Truemu_Plot
 ```
 * Describe the association between effect size and power.
-The effect size is the difference between the true mu and the mu we assumed (mu = 0 in this situation), so when the true mu goes from 0 to 6, the effect size increases, then we found the power of the test also increases. We can conclude that when everything else doesn't change, the power of test will increase if the effect size increases.
+The effect size is the difference between the true mu and the mu we assumed (mu = 0) in this situation), so when the true mu goes from 1 to 6, the effect size increases, then we found the power of the test also increases. We can conclude that when everything else doesn't change, the power of test will increase if the effect size increases.
 
 ##### Part D
 
-Make a plot showing the average estimate of μ_cap on the y axis and the true value of μ on the x axis. 
+Make a plot showing the average estimate of mu_cap on the y axis and the true value of mu on the x axis. 
 ```{r}
 Ave_True_plot = 
   sim_df %>% 
@@ -192,7 +192,7 @@ Ave_True_plot =
 Ave_True_plot
 ```
 
-Make a second plot the average estimate of μ_cap only in samples for which the null was rejected on the y axis and the true value of μ on the x axis. 
+Make a second plot the average estimate of mu_cap only in samples for which the null was rejected on the y axis and the true value of mu on the x axis. 
 ```{r}
 Ave_In_Reject_Plot = 
   sim_df %>% 
@@ -206,5 +206,5 @@ Ave_In_Reject_Plot =
 Ave_In_Reject_Plot
 ```
 
-* The sample average of μ_cap across tests for which the null is rejected is approximately equal to the true value of μ
-* 
+* The sample average of mu_cap across tests for which the null is rejected is approximately equal to the true value of mu. When the true value of mu increases(above 4 in this plot), the sample average of mu_cap across tests for which the null is rejected will be more close to/equal to the true value of mu. 
+* This is because when the true value of mu increases, the effect size increases, then the power of the test will also increase. Since the power of test increases, the probability of reject the false null hypothesis will increase, then the estimate mu (mu_cap) that is not proper/suitable is been rejected, so the sample average of mu_cap will approximately equal to the true value of mu.
