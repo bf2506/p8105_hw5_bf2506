@@ -17,7 +17,7 @@ homi_data =
 ```
 **Describe the raw data:**
 
-* The dataset has `r ncol(homi_data)` variables and `r nrow(homi_data)` observations.
+* The dataset has `r ncol(homi_data)` variables and `r nrow(homi_data)` observations. (Variables are as follows)
 
   * "uid"(the abbreviation of city - number); "reported_date"
   
@@ -95,17 +95,20 @@ Considering the total number of homicides is 1 and the number of unsolved homici
 ##### Part C
 
 Create a plot that shows the estimates and CIs for each city – check out geom_errorbar for a way to add error bars based on the upper and lower limits. Organize cities according to the proportion of unsolved homicides
+
 ```{r}
 Estimates_CIs_Plot = 
   prop_df %>% 
   ggplot(aes(x = reorder(city_state, estimate), y = estimate)) + 
   geom_point() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high)) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme(axis.text.x = element_text(size = 9, face = "bold", angle = 70, hjust = 1), 
+        plot.title = element_text(hjust = 0.5)) +
   labs(title = "Estimate And CI Of Proportion Of Unsolved Homicides For Each City", x = "City, State", y = "Estimate / CI")
 
 Estimates_CIs_Plot
 ```
+
 Since I discussed aboved, the  total number of homicides and the number of unsolved homicides in Tulsa, AL are not sufficient and enough to analyze and run a prop.test, the "Estimate And CI Of Proportion Of Unsolved Homicides For Each City" plot doesn't include Tulsa, AL data.
 
 ### Problem 3
@@ -170,6 +173,7 @@ Power_Truemu_Plot =
   summarize(times = n()) %>% 
   ggplot(aes(x = as.factor(mu), y = times/5000)) + 
   geom_point(alpha = .6) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   labs(title = "The Power Of The Test Of Every True MU", x = "True Value Of Mu", y = "Proportion Of Times Null Was Rejected ")
 
 Power_Truemu_Plot
@@ -187,6 +191,7 @@ Ave_True_plot =
   summarize(ave_mu_cap = mean(mu_cap)) %>% 
   ggplot(aes(x = as.factor(mu), y = ave_mu_cap)) + 
   geom_point(alpha = .6) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   labs(title = "Average Estimate Of Mu_cap Of Every True Mu", x = "True Value Of Mu", y = "Average Estimate Of Mu_cap")
 
 Ave_True_plot
@@ -201,6 +206,7 @@ Ave_In_Reject_Plot =
   summarize(ave_reject = mean(mu_cap)) %>% 
   ggplot(aes(x = as.factor(mu), y = ave_reject)) + 
   geom_point(alpha = .6) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   labs(title = "Average Estimate Of Mu_cap Of Every True Mu In Reject-Null-Sample", x = "True Value Of Mu", y = "Average Estimate Of Mu_cap In Reject-Null-Sample")
 
 Ave_In_Reject_Plot
