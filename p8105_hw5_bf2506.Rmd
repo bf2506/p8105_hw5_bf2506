@@ -6,6 +6,7 @@ output: github_document
 ---
 ```{r load package, message=FALSE, warning=FALSE}
 library(tidyverse)
+
 ```
 
 ### Problem 2
